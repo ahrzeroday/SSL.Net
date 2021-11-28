@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Shadynet
+namespace SSL.Net
 {
     /// <summary>
     /// It represents a collection of strings representing the query parameters.

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace Shadynet.Http
+namespace SSL.Net.Http
 {
     /// <summary>
     /// It represents the body of the request in the form of bytes.

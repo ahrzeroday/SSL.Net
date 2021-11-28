@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Shadynet.Threading
+namespace SSL.Net.Threading
 {
     public sealed class MultiThreadingRepeatEventArgs : EventArgs
     {

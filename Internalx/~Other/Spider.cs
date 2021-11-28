@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Shadynet.Http;
-using Shadynet.Proxy;
-using Shadynet.Threading;
-using Shadynet.Other;
+using SSL.Net.Http;
+using SSL.Net.Proxy;
+using SSL.Net.Threading;
+using SSL.Net.Other;
 using System.Text.RegularExpressions;
 
-namespace Shadynet.Other
+namespace SSL.Net.Other
 {
     public class Spider : IDisposable
     {

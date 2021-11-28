@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Shadynet.Http
+namespace SSL.Net.Http
 {
     /// <summary>
     /// It represents a collection of HTTP-cookies.

@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Threading;
 
-namespace Shadynet.Threading
+namespace SSL.Net.Threading
 {
     public class AsyncEvent<TEventArgs> where TEventArgs : EventArgs
     {

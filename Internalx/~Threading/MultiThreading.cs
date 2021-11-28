@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading;
-using Shadynet.Http;
+using SSL.Net.Http;
 
-namespace Shadynet.Threading
+namespace SSL.Net.Threading
 {
     public class MultiThreading : IDisposable
     {

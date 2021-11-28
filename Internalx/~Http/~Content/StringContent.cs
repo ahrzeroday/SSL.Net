@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace Shadynet.Http
+namespace SSL.Net.Http
 {
     /// <summary>
     /// It represents a body of the request line.

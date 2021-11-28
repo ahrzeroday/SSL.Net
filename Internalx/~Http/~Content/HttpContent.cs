@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace Shadynet.Http
+namespace SSL.Net.Http
 {
     /// <summary>
     /// It is the body of the request. Available from immediately after sending.

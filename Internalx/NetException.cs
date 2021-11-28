@@ -2,7 +2,7 @@
 using System.Runtime.Serialization;
 using System.Security.Permissions;
 
-namespace Shadynet
+namespace SSL.Net
 {
     /// <summary>
     /// The exception that is thrown when an error occurs in the network.

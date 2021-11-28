@@ -1,5 +1,5 @@
 
-namespace Shadynet.Http
+namespace SSL.Net.Http
 {
     /// <summary>
     /// HTTP-request method.

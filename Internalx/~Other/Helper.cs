@@ -1,12 +1,12 @@
 ﻿using System;
-using Shadynet.Http;
-using Shadynet.Proxy;
-using Shadynet.Threading;
+using SSL.Net.Http;
+using SSL.Net.Proxy;
+using SSL.Net.Threading;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace Shadynet
+namespace SSL.Net
 {
     /// <summary>
     /// Represends a new forge of <see cref="Helper"/>, really useful.

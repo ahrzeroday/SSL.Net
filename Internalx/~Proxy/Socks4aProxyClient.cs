@@ -1,7 +1,7 @@
 ﻿using System.Net.Sockets;
 using System.Text;
 
-namespace Shadynet.Proxy
+namespace SSL.Net.Proxy
 {
     /// <summary>
     /// Represents the client proxy Socks4a.

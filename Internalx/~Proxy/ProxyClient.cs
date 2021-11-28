@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Shadynet.Proxy
+namespace SSL.Net.Proxy
 {
     /// <summary>
     /// It represents the base class implementation to work with a proxy server.
@@ -415,7 +415,7 @@ namespace Shadynet.Proxy
         /// <exception cref="System.ArgumentNullException">parameter <paramref name="destinationHost"/> equally <see langword="null"/>.</exception>
         /// <exception cref="System.ArgumentException">parameter <paramref name="destinationHost"/> is an empty string.</exception>
         /// <exception cref="System.ArgumentOutOfRangeException">parameter <paramref name="destinationPort"/> less than 1 or greater than 65535.</exception>
-        /// <exception cref="Shadynet.ProxyException">Failed to work with a proxy server.</exception>
+        /// <exception cref="SSL.Net.ProxyException">Failed to work with a proxy server.</exception>
         public abstract TcpClient CreateConnection(string destinationHost, int destinationPort, TcpClient tcpClient = null);
 
         public async Task<TcpClient> CreateConnectionAsync(string destinationHost, int destinationPort, TcpClient tcpClient = null)
@@ -520,7 +520,7 @@ namespace Shadynet.Proxy
         /// It creates a connection to a proxy server.
         /// </summary>
         /// <returns>The connection to the proxy server.</returns>
-        /// <exception cref="Shadynet.ProxyException">Failed to work with a proxy server.</exception>
+        /// <exception cref="SSL.Net.ProxyException">Failed to work with a proxy server.</exception>
         protected TcpClient CreateConnectionToProxy()
         {
             TcpClient tcpClient = null;

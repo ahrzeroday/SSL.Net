@@ -1,4 +1,4 @@
-﻿namespace Shadynet.Proxy
+﻿namespace SSL.Net.Proxy
 {
     /// <summary>
     /// enum represents a proxy-type

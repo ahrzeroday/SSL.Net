@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Shadynet
+namespace SSL.Net
 {
     internal static class ExceptionHelper
     {

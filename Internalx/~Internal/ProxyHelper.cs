@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Shadynet.Proxy
+namespace SSL.Net.Proxy
 {
     internal static class ProxyHelper
     {

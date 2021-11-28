@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace Shadynet.Proxy
+namespace SSL.Net.Proxy
 {
     /// <summary>
     /// The exception that is thrown when an error occurs when using a proxy.

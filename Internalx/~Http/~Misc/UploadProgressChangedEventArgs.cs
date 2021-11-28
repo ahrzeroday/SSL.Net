@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Shadynet.Http
+namespace SSL.Net.Http
 {
     /// <summary>
     /// It represents the data for the event, informing about the data upload progress.

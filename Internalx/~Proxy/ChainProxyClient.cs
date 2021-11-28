@@ -4,7 +4,7 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 
-namespace Shadynet.Proxy
+namespace SSL.Net.Proxy
 {
     /// <summary>
     /// It is a chain of different proxy servers.

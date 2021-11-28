@@ -4,7 +4,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 
-namespace Shadynet.Proxy
+namespace SSL.Net.Proxy
 {
     /// <summary>
     /// Represents client Socks5 proxy.
@@ -139,7 +139,7 @@ namespace Shadynet.Proxy
         /// <exception cref="System.ArgumentNullException">parameter <paramref name="destinationHost"/> equally <see langword="null"/>.</exception>
         /// <exception cref="System.ArgumentException">parameter <paramref name="destinationHost"/> It is an empty string.</exception>
         /// <exception cref="System.ArgumentOutOfRangeException">parameter <paramref name="destinationPort"/> less than 1 or greater than 65535.</exception>
-        /// <exception cref="Shadynet.Proxy.ProxyException">Failed to work with a proxy server.</exception>
+        /// <exception cref="SSL.Net.Proxy.ProxyException">Failed to work with a proxy server.</exception>
         public override TcpClient CreateConnection(string destinationHost, int destinationPort, TcpClient tcpClient = null)
         {
             CheckState();

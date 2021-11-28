@@ -6,11 +6,11 @@ using System.Resources;
 // Managing Public information about the assembly by means of 
 // Set of attributes. Change these attribute values ​​to modify the information,
 // Associated with an assembly.
-[assembly: AssemblyTitle("Shadynet")]
+[assembly: AssemblyTitle("SSL.Net")]
 [assembly: AssemblyDescription("A .net class library for http/s with proxies and multi-threading support.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Shadyzpop / Shadyz")]
-[assembly: AssemblyProduct("Shadynet")]
+[assembly: AssemblyProduct("SSL.Net")]
 [assembly: AssemblyCopyright("Copyright © Shady <imedevil@yahoo.com> | github.com/shadyzpop")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

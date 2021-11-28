@@ -2,7 +2,7 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Shadynet.Security.Cryptography
+namespace SSL.Net.Security.Cryptography
 {
     class Cryptography
     {

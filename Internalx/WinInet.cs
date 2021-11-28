@@ -2,9 +2,9 @@
 using System.IO;
 using System.Security;
 using Microsoft.Win32;
-using Shadynet.Proxy;
+using SSL.Net.Proxy;
 
-namespace Shadynet
+namespace SSL.Net
 {
     /// <summary>
     /// It represents a class to interact with the network settings of the Windows operating system.

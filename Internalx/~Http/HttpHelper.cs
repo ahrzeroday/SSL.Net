@@ -6,7 +6,7 @@ using System.Text;
 using Microsoft.Win32;
 using System.Net.Security;
 
-namespace Shadynet.Http
+namespace SSL.Net.Http
 {
     /// <summary>
     /// It is a static class, designed to aid in working with the HTTP-report.
