@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSL.Net", "SSL.Net.csproj", "{5D25D06E-0D35-42EF-BBA2-D5DE6E06CD04}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSL.Net", "SSL.Net.csproj", "{BA47A251-7F08-4D1A-A0DD-8412C000842B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5D25D06E-0D35-42EF-BBA2-D5DE6E06CD04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5D25D06E-0D35-42EF-BBA2-D5DE6E06CD04}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5D25D06E-0D35-42EF-BBA2-D5DE6E06CD04}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5D25D06E-0D35-42EF-BBA2-D5DE6E06CD04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA47A251-7F08-4D1A-A0DD-8412C000842B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA47A251-7F08-4D1A-A0DD-8412C000842B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA47A251-7F08-4D1A-A0DD-8412C000842B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA47A251-7F08-4D1A-A0DD-8412C000842B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {9F6EAF9F-7295-4F60-AA2F-2AD89A27000B}
+		SolutionGuid = {651A21DF-AB21-4E91-ABCE-EE52989E7252}
 	EndGlobalSection
 EndGlobal
