@@ -1,9 +1,10 @@
+using SSL.Net.Proxy;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Diagnostics;
 using System.Net;
 using System.Net.Security;
 using System.Net.Sockets;
@@ -12,8 +13,6 @@ using System.Security.Authentication;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using SSL.Net.Proxy;
-using SSL.Net.Threading;
 
 namespace SSL.Net.Http
 {
@@ -27,8 +26,8 @@ namespace SSL.Net.Http
         {
             #region Fields (closed)
 
-            private Stream _baseStream;
-            private int _sendBufferSize;
+            private readonly Stream _baseStream;
+            private readonly int _sendBufferSize;
 
             #endregion
 
@@ -41,56 +40,20 @@ namespace SSL.Net.Http
 
             #region overdetermined
 
-            public override bool CanRead
-            {
-                get
-                {
-                    return _baseStream.CanRead;
-                }
-            }
+            public override bool CanRead => _baseStream.CanRead;
 
-            public override bool CanSeek
-            {
-                get
-                {
-                    return _baseStream.CanSeek;
-                }
-            }
+            public override bool CanSeek => _baseStream.CanSeek;
 
-            public override bool CanTimeout
-            {
-                get
-                {
-                    return _baseStream.CanTimeout;
-                }
-            }
+            public override bool CanTimeout => _baseStream.CanTimeout;
 
-            public override bool CanWrite
-            {
-                get
-                {
-                    return _baseStream.CanWrite;
-                }
-            }
+            public override bool CanWrite => _baseStream.CanWrite;
 
-            public override long Length
-            {
-                get
-                {
-                    return _baseStream.Length;
-                }
-            }
+            public override long Length => _baseStream.Length;
 
             public override long Position
             {
-                get
-                {
-                    return _baseStream.Position;
-                }
-                set
-                {
-                    _baseStream.Position = value;
-                }
+                get => _baseStream.Position;
+                set => _baseStream.Position = value;
             }
 
             #endregion
@@ -320,13 +283,7 @@ namespace SSL.Net.Http
         /// <summary>
         /// Gets the last response from the HTTP-server obtained by the instance.
         /// </summary>
-        public HttpResponse Response
-        {
-            get
-            {
-                return _response;
-            }
-        }
+        public HttpResponse Response => _response;
 
         /// <summary>
         /// Gets or sets the proxy client.
@@ -355,10 +312,7 @@ namespace SSL.Net.Http
         /// <exception cref="System.ArgumentOutOfRangeException">The parameter value is less than 1.</exception>
         public int MaximumAutomaticRedirections
         {
-            get
-            {
-                return _maximumAutomaticRedirections;
-            }
+            get => _maximumAutomaticRedirections;
             set
             {
                 #region Check parameter
@@ -381,10 +335,7 @@ namespace SSL.Net.Http
         /// <exception cref="System.ArgumentOutOfRangeException">The parameter value is less than 0.</exception>
         public int ConnectTimeout
         {
-            get
-            {
-                return _connectTimeout;
-            }
+            get => _connectTimeout;
             set
             {
                 #region Check parameter
@@ -407,10 +358,7 @@ namespace SSL.Net.Http
         /// <exception cref="System.ArgumentOutOfRangeException">The parameter value is less than 0.</exception>
         public int ReadWriteTimeout
         {
-            get
-            {
-                return _readWriteTimeout;
-            }
+            get => _readWriteTimeout;
             set
             {
                 #region Check parameter
@@ -448,10 +396,7 @@ namespace SSL.Net.Http
         /// <remarks>If time is up, it will create a new connection.   If the server returns its value timeout <see cref="HttpResponse.KeepAliveTimeout"/>, then it it will be used.</remarks>
         public int KeepAliveTimeout
         {
-            get
-            {
-                return _keepAliveTimeout;
-            }
+            get => _keepAliveTimeout;
             set
             {
                 #region Check parameter
@@ -475,10 +420,7 @@ namespace SSL.Net.Http
         /// <remarks>If the number of requests exceeds the maximum, it will create a new connection.   If your server returns the maximum of number of queries <see cref="HttpResponse.MaximumKeepAliveRequests"/>, then it it will be used.</remarks>
         public int MaximumKeepAliveRequests
         {
-            get
-            {
-                return _maximumKeepAliveRequests;
-            }
+            get => _maximumKeepAliveRequests;
             set
             {
                 #region Check parameter
@@ -507,10 +449,7 @@ namespace SSL.Net.Http
         /// <exception cref="System.ArgumentOutOfRangeException">The parameter value is less than 1.</exception>
         public int ReconnectLimit
         {
-            get
-            {
-                return _reconnectLimit;
-            }
+            get => _reconnectLimit;
             set
             {
                 #region Check parameter
@@ -533,10 +472,7 @@ namespace SSL.Net.Http
         /// <exception cref="System.ArgumentOutOfRangeException">The value is less than 0.</exception>
         public int ReconnectDelay
         {
-            get
-            {
-                return _reconnectDelay;
-            }
+            get => _reconnectDelay;
             set
             {
                 #region Check parameter
@@ -597,14 +533,8 @@ namespace SSL.Net.Http
         /// <value>default value — <see langword="null"/>.</value>
         public string UserAgent
         {
-            get
-            {
-                return this["User-Agent"];
-            }
-            set
-            {
-                this["User-Agent"] = value;
-            }
+            get => this["User-Agent"];
+            set => this["User-Agent"] = value;
         }
 
         /// <summary>
@@ -613,14 +543,8 @@ namespace SSL.Net.Http
         /// <value>default value — <see langword="null"/>.</value>
         public string Referer
         {
-            get
-            {
-                return this["Referer"];
-            }
-            set
-            {
-                this["Referer"] = value;
-            }
+            get => this["Referer"];
+            set => this["Referer"] = value;
         }
 
         /// <summary>
@@ -629,14 +553,8 @@ namespace SSL.Net.Http
         /// <value>default value — <see langword="null"/>.</value>
         public string Authorization
         {
-            get
-            {
-                return this["Authorization"];
-            }
-            set
-            {
-                this["Authorization"] = value;
-            }
+            get => this["Authorization"];
+            set => this["Authorization"] = value;
         }
 
         /// <summary>
@@ -653,29 +571,11 @@ namespace SSL.Net.Http
 
         #region Properties (internal)
 
-        internal TcpClient TcpClient
-        {
-            get
-            {
-                return _connection;
-            }
-        }
+        internal TcpClient TcpClient => _connection;
 
-        internal Stream ClientStream
-        {
-            get
-            {
-                return _connectionCommonStream;
-            }
-        }
+        internal Stream ClientStream => _connectionCommonStream;
 
-        internal NetworkStream ClientNetworkStream
-        {
-            get
-            {
-                return _connectionNetworkStream;
-            }
-        }
+        internal NetworkStream ClientNetworkStream => _connectionNetworkStream;
 
         #endregion
 
@@ -747,9 +647,10 @@ namespace SSL.Net.Http
 
                 #endregion
 
-                string value;
+                #endregion
 
-                if (!_permanentHeaders.TryGetValue(headerName, out value))
+
+                if (!_permanentHeaders.TryGetValue(headerName, out string value))
                 {
                     value = string.Empty;
                 }
@@ -819,17 +720,11 @@ namespace SSL.Net.Http
         /// </remarks>
         public string this[HttpHeader header]
         {
-            get
-            {
-                return this[HttpHelper.Headers[header]];
-            }
-            set
-            {
-                this[HttpHelper.Headers[header]] = value;
-            }
+            get => this[HttpHelper.Headers[header]];
+            set => this[HttpHelper.Headers[header]] = value;
         }
 
-        #endregion
+#endregion
 
 
         #region Constructors (open)
@@ -874,7 +769,7 @@ namespace SSL.Net.Http
                 baseAddress = "http://" + baseAddress;
             }
 
-            var uri = new Uri(baseAddress);
+            Uri uri = new Uri(baseAddress);
 
             if (!uri.IsAbsoluteUri)
             {
@@ -973,8 +868,9 @@ namespace SSL.Net.Http
         /// <exception cref="SSL.Net.Http.HttpException">Error when working with the HTTP-report.</exception>
         public async Task<HttpResponse> GetAsync(string address, RequestParams urlParams = null)
         {
-            return await Task.Run(() => {
-                return this.Get(address, urlParams);
+            return await Task.Run(() =>
+            {
+                return Get(address, urlParams);
             });
         }
 
@@ -990,7 +886,7 @@ namespace SSL.Net.Http
         {
             return await Task.Run(() =>
             {
-                return this.Get(address, urlParams);
+                return Get(address, urlParams);
             });
         }
 
@@ -1013,7 +909,7 @@ namespace SSL.Net.Http
         {
             return Raw(HttpMethod.POST, address);
         }
-        
+
         /// <summary>
         /// Sends the HTTP POST-search-server.
         /// </summary>
@@ -1129,7 +1025,7 @@ namespace SSL.Net.Http
 
             #endregion
 
-            var content = new StringContent(str)
+            StringContent content = new StringContent(str)
             {
                 ContentType = contentType
             };
@@ -1183,7 +1079,7 @@ namespace SSL.Net.Http
 
             #endregion
 
-            var content = new StringContent(str)
+            StringContent content = new StringContent(str)
             {
                 ContentType = contentType
             };
@@ -1232,7 +1128,7 @@ namespace SSL.Net.Http
 
             #endregion
 
-            var content = new BytesContent(bytes)
+            BytesContent content = new BytesContent(bytes)
             {
                 ContentType = contentType
             };
@@ -1277,7 +1173,7 @@ namespace SSL.Net.Http
 
             #endregion
 
-            var content = new BytesContent(bytes)
+            BytesContent content = new BytesContent(bytes)
             {
                 ContentType = contentType
             };
@@ -1326,7 +1222,7 @@ namespace SSL.Net.Http
 
             #endregion
 
-            var content = new StreamContent(stream)
+            StreamContent content = new StreamContent(stream)
             {
                 ContentType = contentType
             };
@@ -1371,7 +1267,7 @@ namespace SSL.Net.Http
 
             #endregion
 
-            var content = new StreamContent(stream)
+            StreamContent content = new StreamContent(stream)
             {
                 ContentType = contentType
             };
@@ -1516,7 +1412,7 @@ namespace SSL.Net.Http
         {
             return await Task.Run(() =>
             {
-                return this.Post(address);
+                return Post(address);
             });
         }
 
@@ -1531,7 +1427,7 @@ namespace SSL.Net.Http
         {
             return await Task.Run(() =>
             {
-                return this.Raw(HttpMethod.POST, address);
+                return Raw(HttpMethod.POST, address);
             });
         }
 
@@ -1562,7 +1458,7 @@ namespace SSL.Net.Http
 
             return await Task.Run(() =>
             {
-                return this.Raw(HttpMethod.POST, address, new FormUrlEncodedContent(reqParams, dontEscape, CharacterSet));
+                return Raw(HttpMethod.POST, address, new FormUrlEncodedContent(reqParams, dontEscape, CharacterSet));
             });
         }
 
@@ -1592,7 +1488,7 @@ namespace SSL.Net.Http
 
             return await Task.Run(() =>
             {
-                return this.Raw(HttpMethod.POST, address, new FormUrlEncodedContent(reqParams, dontEscape, CharacterSet));
+                return Raw(HttpMethod.POST, address, new FormUrlEncodedContent(reqParams, dontEscape, CharacterSet));
             });
         }
 
@@ -1622,7 +1518,7 @@ namespace SSL.Net.Http
         {
             return await Task.Run(() =>
             {
-                return this.Post(address, str, contentType);
+                return Post(address, str, contentType);
             });
         }
 
@@ -1650,7 +1546,7 @@ namespace SSL.Net.Http
         {
             return await Task.Run(() =>
             {
-                return this.Post(address, str, contentType);
+                return Post(address, str, contentType);
             });
         }
 
@@ -1678,7 +1574,7 @@ namespace SSL.Net.Http
         {
             return await Task.Run(() =>
             {
-                return this.Post(address, bytes, contentType);
+                return Post(address, bytes, contentType);
             });
         }
 
@@ -1702,7 +1598,7 @@ namespace SSL.Net.Http
         {
             return await Task.Run(() =>
             {
-                return this.Post(address, bytes, contentType);
+                return Post(address, bytes, contentType);
             });
         }
 
@@ -1730,7 +1626,7 @@ namespace SSL.Net.Http
         {
             return await Task.Run(() =>
             {
-                return this.Post(address, stream, contentType);
+                return Post(address, stream, contentType);
             });
         }
 
@@ -1754,7 +1650,7 @@ namespace SSL.Net.Http
         {
             return await Task.Run(() =>
             {
-                return this.Post(address, stream, contentType);
+                return Post(address, stream, contentType);
             });
         }
 
@@ -1779,7 +1675,7 @@ namespace SSL.Net.Http
         {
             return await Task.Run(() =>
             {
-                return this.Post(address, path);
+                return Post(address, path);
             });
         }
 
@@ -1800,7 +1696,7 @@ namespace SSL.Net.Http
         {
             return await Task.Run(() =>
             {
-                return this.Post(address, path);
+                return Post(address, path);
             });
         }
 
@@ -1821,7 +1717,7 @@ namespace SSL.Net.Http
         {
             return await Task.Run(() =>
             {
-                return this.Post(address, content);
+                return Post(address, content);
             });
         }
 
@@ -1841,7 +1737,7 @@ namespace SSL.Net.Http
         {
             return await Task.Run(() =>
             {
-                return this.Post(address, content);
+                return Post(address, content);
             });
         }
 
@@ -1877,7 +1773,7 @@ namespace SSL.Net.Http
 
             #endregion
 
-            var uri = new Uri(address, UriKind.RelativeOrAbsolute);
+            Uri uri = new Uri(address, UriKind.RelativeOrAbsolute);
             return Raw(method, uri, content);
         }
 
@@ -1902,12 +1798,16 @@ namespace SSL.Net.Http
             #endregion
 
             if (!address.IsAbsoluteUri)
+            {
                 address = GetRequestAddress(BaseAddress, address);
+            }
 
             if (_temporaryUrlParams != null)
             {
-                var uriBuilder = new UriBuilder(address);
-                uriBuilder.Query = HttpHelper.ToQueryString(_temporaryUrlParams, true);
+                UriBuilder uriBuilder = new UriBuilder(address)
+                {
+                    Query = HttpHelper.ToQueryString(_temporaryUrlParams, true)
+                };
 
                 address = uriBuilder.Uri;
             }
@@ -1924,7 +1824,7 @@ namespace SSL.Net.Http
                 }
             }
             #region ConnectionTimer
-            var ConnectionTimer = Stopwatch.StartNew();
+            Stopwatch ConnectionTimer = Stopwatch.StartNew();
             #endregion
             try
             {
@@ -1933,7 +1833,9 @@ namespace SSL.Net.Http
             finally
             {
                 if (content != null)
+                {
                     content.Dispose();
+                }
 
                 ClearRequestData();
 
@@ -1960,7 +1862,7 @@ namespace SSL.Net.Http
         {
             return await Task.Run(() =>
             {
-                return this.Raw(method, address, content);
+                return Raw(method, address, content);
             });
         }
 
@@ -1977,7 +1879,7 @@ namespace SSL.Net.Http
         {
             return await Task.Run(() =>
             {
-                return this.Raw(method, address, content);
+                return Raw(method, address, content);
             });
         }
 
@@ -2054,18 +1956,18 @@ namespace SSL.Net.Http
                 if (postdata.Contains("&"))
                 {
                     string[] datastruct = postdata.Split('&');
-                    foreach (var data in datastruct)
+                    foreach (string data in datastruct)
                     {
-                        var key = data.Split('=')[0].Trim();
-                        var value = data.Split('=')[1].Trim();
+                        string key = data.Split('=')[0].Trim();
+                        string value = data.Split('=')[1].Trim();
                         _temporaryParams[key] = value;
                     }
                     return this;
                 }
                 else
                 {
-                    var key = postdata.Split('=')[0].Trim();
-                    var value = postdata.Split('=')[1].Trim();
+                    string key = postdata.Split('=')[0].Trim();
+                    string value = postdata.Split('=')[1].Trim();
                     _temporaryParams[key] = value;
                     return this;
                 }
@@ -2554,12 +2456,9 @@ namespace SSL.Net.Http
         /// </summary>
         /// <param name="name">The name of the cookie.</param>
         /// <returns>value <see langword="true"/>, if these cookies contain, or value <see langword="false"/>.</returns>
-        public bool ContainsCookie(string name)
+        public bool ContainsCookie(string url, string name)
         {
-            if (Cookies == null)
-                return false;
-
-            return Cookies.ContainsKey(name);
+            return Cookies != null && Cookies.Contains(url, name);
         }
 
         #region Working with headers
@@ -2684,11 +2583,11 @@ namespace SSL.Net.Http
 
         private Uri GetRequestAddress(Uri baseAddress, Uri address)
         {
-            var requestAddress = address;
+            Uri requestAddress = address;
 
             if (baseAddress == null)
             {
-                var uriBuilder = new UriBuilder(address.OriginalString);
+                UriBuilder uriBuilder = new UriBuilder(address.OriginalString);
                 requestAddress = uriBuilder.Uri;
             }
             else
@@ -2708,26 +2607,32 @@ namespace SSL.Net.Http
 
             CloseConnectionIfNeeded();
 
-            var previousAddress = Address;
+            Uri previousAddress = Address;
             Address = address;
 
-            var createdNewConnection = false;
+            bool createdNewConnection = false;
             try
             {
                 createdNewConnection = TryCreateConnectionOrUseExisting(address, previousAddress);
             }
-            catch (HttpException ex)
+            catch (HttpException)
             {
                 if (CanReconnect())
+                {
                     return ReconnectAfterFail();
+                }
 
                 throw;
             }
 
             if (createdNewConnection)
+            {
                 _keepAliveRequestCount = 1;
+            }
             else
+            {
                 _keepAliveRequestCount++;
+            }
 
             #region Sending request
 
@@ -2742,7 +2647,9 @@ namespace SSL.Net.Http
             catch (IOException ex)
             {
                 if (CanReconnect())
+                {
                     return ReconnectAfterFail();
+                }
 
                 throw NewHttpException(Resources.HttpException_FailedSendRequest, ex, HttpExceptionStatus.SendFailure);
             }
@@ -2758,12 +2665,16 @@ namespace SSL.Net.Http
             catch (HttpException ex)
             {
                 if (CanReconnect())
+                {
                     return ReconnectAfterFail();
+                }
 
                 // If the server is interrupted permanent connection returned an empty response, then try to connect again.
                 // He could break the connection because it has the maximum number of queries came or downtime.
                 if (KeepAlive && !_keepAliveReconnected && !createdNewConnection && ex.EmptyMessageBody)
+                {
                     return KeepAliveReconect();
+                }
 
                 throw;
             }
@@ -2777,14 +2688,18 @@ namespace SSL.Net.Http
             _whenConnectionIdle = DateTime.Now;
 
             if (!IgnoreProtocolErrors)
+            {
                 CheckStatusCode(_response.StatusCode);
+            }
 
             #region call forwarding
 
             if (AllowAutoRedirect && _response.HasRedirect)
             {
                 if (++_redirectionCount > _maximumAutomaticRedirections)
+                {
                     throw NewHttpException(Resources.HttpException_LimitRedirections);
+                }
 
                 ClearRequestData();
                 return Request(HttpMethod.GET, _response.RedirectAddress, null);
@@ -2799,7 +2714,7 @@ namespace SSL.Net.Http
 
         private void CloseConnectionIfNeeded()
         {
-            var hasConnection = (_connection != null);
+            bool hasConnection = (_connection != null);
 
             if (hasConnection && !_response.HasError &&
                 !_response.MessageBodyLoaded)
@@ -2819,10 +2734,10 @@ namespace SSL.Net.Http
         {
             ProxyClient proxy = GetProxy();
 
-            var hasConnection = (_connection != null);
-            var proxyChanged = (_currentProxy != proxy);
+            bool hasConnection = (_connection != null);
+            bool proxyChanged = (_currentProxy != proxy);
 
-            var addressChanged =
+            bool addressChanged =
                 (previousAddress == null) ||
                 (previousAddress.Port != address.Port) ||
                 (previousAddress.Host != address.Host) ||
@@ -2846,28 +2761,34 @@ namespace SSL.Net.Http
         private bool KeepAliveLimitIsReached()
         {
             if (!KeepAlive)
+            {
                 return false;
+            }
 
-            var maximumKeepAliveRequests =
+            int maximumKeepAliveRequests =
                 _response.MaximumKeepAliveRequests ?? _maximumKeepAliveRequests;
 
             if (_keepAliveRequestCount >= maximumKeepAliveRequests)
+            {
                 return true;
+            }
 
-            var keepAliveTimeout =
+            int keepAliveTimeout =
                 _response.KeepAliveTimeout ?? _keepAliveTimeout;
 
-            var timeLimit = _whenConnectionIdle.AddMilliseconds(keepAliveTimeout);
+            DateTime timeLimit = _whenConnectionIdle.AddMilliseconds(keepAliveTimeout);
             if (timeLimit < DateTime.Now)
+            {
                 return true;
+            }
 
             return false;
         }
 
         private void SendRequestData(HttpMethod method)
         {
-            var contentLength = 0L;
-            var contentType = string.Empty;
+            long contentLength = 0L;
+            string contentType = string.Empty;
 
             if (CanContainsRequestBody(method) && (_content != null))
             {
@@ -2875,11 +2796,11 @@ namespace SSL.Net.Http
                 contentLength = _content.CalculateContentLength();
             }
 
-            var startingLine = GenerateStartingLine(method);
-            var headers = GenerateHeaders(method, contentLength, contentType);
+            string startingLine = GenerateStartingLine(method);
+            string headers = GenerateHeaders(method, contentLength, contentType);
 
-            var startingLineBytes = Encoding.ASCII.GetBytes(startingLine);
-            var headersBytes = Encoding.ASCII.GetBytes(headers);
+            byte[] startingLineBytes = Encoding.ASCII.GetBytes(startingLine);
+            byte[] headersBytes = Encoding.ASCII.GetBytes(headers);
 
             _bytesSent = 0;
             _totalBytesSent = startingLineBytes.Length + headersBytes.Length + contentLength;
@@ -2887,11 +2808,13 @@ namespace SSL.Net.Http
             _connectionCommonStream.Write(startingLineBytes, 0, startingLineBytes.Length);
             _connectionCommonStream.Write(headersBytes, 0, headersBytes.Length);
 
-            var hasRequestBody = (_content != null) && (contentLength > 0);
+            bool hasRequestBody = (_content != null) && (contentLength > 0);
 
             // Sends a request to the body if it is not present.
             if (hasRequestBody)
+            {
                 _content.WriteTo(_connectionCommonStream);
+            }
         }
 
         private void ReceiveResponseHeaders(HttpMethod method)
@@ -2927,7 +2850,7 @@ namespace SSL.Net.Http
 
         private void CheckStatusCode(HttpStatusCode statusCode)
         {
-            var statusCodeNum = (int)statusCode;
+            int statusCodeNum = (int)statusCode;
 
             if ((statusCodeNum >= 400) && (statusCodeNum < 500))
             {
@@ -2962,10 +2885,10 @@ namespace SSL.Net.Http
             {
                 try
                 {
-                    var checkIp = IPAddress.Parse("127.0.0.1");
+                    IPAddress checkIp = IPAddress.Parse("127.0.0.1");
                     IPAddress[] ips = Dns.GetHostAddresses(Address.Host);
 
-                    foreach (var ip in ips)
+                    foreach (IPAddress ip in ips)
                     {
                         if (ip.Equals(checkIp))
                         {
@@ -3006,7 +2929,7 @@ namespace SSL.Net.Http
                 tcpClient = new TcpClient();
 
                 Exception connectException = null;
-                var connectDoneEvent = new ManualResetEventSlim();
+                ManualResetEventSlim connectDoneEvent = new ManualResetEventSlim();
 
                 try
                 {
@@ -3067,7 +2990,7 @@ namespace SSL.Net.Http
                 }
 
                 #endregion
-                
+
                 tcpClient.SendTimeout = _readWriteTimeout;
                 tcpClient.ReceiveTimeout = _readWriteTimeout;
             }
@@ -3128,7 +3051,7 @@ namespace SSL.Net.Http
             if (_uploadProgressChangedHandler != null ||
                 _downloadProgressChangedHandler != null)
             {
-                var httpWraperStream = new HttpWraperStream(
+                HttpWraperStream httpWraperStream = new HttpWraperStream(
                     _connectionCommonStream, _connection.SendBufferSize);
 
                 if (_uploadProgressChangedHandler != null)
@@ -3173,29 +3096,37 @@ namespace SSL.Net.Http
         // - Time-headers that are specified through method AddHeader
         private string GenerateHeaders(HttpMethod method, long contentLength = 0, string contentType = null)
         {
-            var headers = GenerateCommonHeaders(method, contentLength, contentType);
+            Dictionary<string, string> headers = GenerateCommonHeaders(method, contentLength, contentType);
 
             MergeHeaders(headers, _permanentHeaders);
 
             if (_temporaryHeaders != null && _temporaryHeaders.Count > 0)
+            {
                 MergeHeaders(headers, _temporaryHeaders);
+            }
 
             if (Cookies != null && Cookies.Count != 0 && !headers.ContainsKey("Cookie"))
+            {
                 headers["Cookie"] = Cookies.ToString();
+            }
 
             return ToHeadersString(headers);
         }
 
         private Dictionary<string, string> GenerateCommonHeaders(HttpMethod method, long contentLength = 0, string contentType = null)
         {
-            var headers = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            Dictionary<string, string> headers = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 
             #region Host
 
             if (Address.IsDefaultPort)
+            {
                 headers["Host"] = Address.Host;
+            }
             else
+            {
                 headers["Host"] = string.Format("{0}:{1}", Address.Host, Address.Port);
+            }
 
             #endregion
 
@@ -3215,9 +3146,13 @@ namespace SSL.Net.Http
             if (httpProxy != null)
             {
                 if (KeepAlive)
+                {
                     headers["Proxy-Connection"] = "keep-alive";
+                }
                 else
+                {
                     headers["Proxy-Connection"] = "close";
+                }
 
                 if (!string.IsNullOrEmpty(httpProxy.Username) ||
                     !string.IsNullOrEmpty(httpProxy.Password))
@@ -3228,9 +3163,13 @@ namespace SSL.Net.Http
             else
             {
                 if (KeepAlive)
+                {
                     headers["Connection"] = "keep-alive";
+                }
                 else
+                {
                     headers["Connection"] = "close";
+                }
             }
 
             if (!string.IsNullOrEmpty(Username) || !string.IsNullOrEmpty(Password))
@@ -3243,13 +3182,19 @@ namespace SSL.Net.Http
             #region Content
 
             if (EnableEncodingContent)
+            {
                 headers["Accept-Encoding"] = "gzip,deflate";
+            }
 
             if (Culture != null)
+            {
                 headers["Accept-Language"] = GetLanguageHeader();
+            }
 
             if (CharacterSet != null)
+            {
                 headers["Accept-Charset"] = GetCharsetHeader();
+            }
 
             if (CanContainsRequestBody(method))
             {
@@ -3289,12 +3234,18 @@ namespace SSL.Net.Http
             string cultureName;
 
             if (Culture != null)
+            {
                 cultureName = Culture.Name;
+            }
             else
+            {
                 cultureName = CultureInfo.CurrentCulture.Name;
+            }
 
             if (cultureName.StartsWith("en"))
+            {
                 return cultureName;
+            }
 
             return string.Format("{0},{1};q=0.8,en-US;q=0.6,en;q=0.4",
                 cultureName, cultureName.Substring(0, 2));
@@ -3323,7 +3274,7 @@ namespace SSL.Net.Http
 
         private void MergeHeaders(Dictionary<string, string> destination, Dictionary<string, string> source)
         {
-            foreach (var sourceItem in source)
+            foreach (KeyValuePair<string, string> sourceItem in source)
             {
                 destination[sourceItem.Key] = sourceItem.Value;
             }
@@ -3337,7 +3288,7 @@ namespace SSL.Net.Http
 
             // HTTP-Proxy are looking in all the proxy chains. 
             // The priority to find a proxy that requires authentication.
-            foreach (var proxy in chainProxy.Proxies)
+            foreach (ProxyClient proxy in chainProxy.Proxies)
             {
                 if (proxy.Type == ProxyType.Http)
                 {
@@ -3368,8 +3319,8 @@ namespace SSL.Net.Http
 
         private string ToHeadersString(Dictionary<string, string> headers)
         {
-            var headersBuilder = new StringBuilder();
-            foreach (var header in headers)
+            StringBuilder headersBuilder = new StringBuilder();
+            foreach (KeyValuePair<string, string> header in headers)
             {
                 headersBuilder.AppendFormat("{0}: {1}\r\n", header.Key, header.Value);
             }
