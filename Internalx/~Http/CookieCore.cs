@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Reflection;
@@ -17,6 +16,7 @@ namespace SSL.Net.Http
         /// <see cref="CookieContainer"/> из .NET Framework.
         /// </summary>
         public CookieContainer Container { get; private set; }
+
         /// <summary>
         /// Get Count of CookieCore Cookies.
         /// </summary>
@@ -32,12 +32,12 @@ namespace SSL.Net.Http
         /// Initializes a new instance of the class <see cref="CookieCore"/>.
         /// </summary>
         /// <param name="isLocked">It indicates whether cookies are closed for editing.</param>
-        public CookieCore(bool isLocked = false,CookieContainer container=null):base()
+        public CookieCore(bool isLocked = false, CookieContainer container = null) : base()
         {
             IsLocked = isLocked;
             Container = container ?? new CookieContainer();
-
         }
+
         /// <summary>
         /// Add Cookie To CookieCore
         /// </summary>
@@ -46,6 +46,7 @@ namespace SSL.Net.Http
         {
             Container.Add(cookie);
         }
+
         /// <summary>
         /// Add CookieCollection To CookieCore
         /// </summary>
@@ -54,6 +55,7 @@ namespace SSL.Net.Http
         {
             Container.Add(cookies);
         }
+
         /// <summary>
         /// Add or Edit an Cookie in CookieCore
         /// </summary>
@@ -65,12 +67,12 @@ namespace SSL.Net.Http
                 Add(cookie);
                 return;
             }
-                
+
             string domain = cookie.Domain[0] == '.' ? cookie.Domain.Substring(1) : cookie.Domain;
             Uri url = new Uri($"{(cookie.Secure ? "https://" : "http://")}{domain}");
-            if (Container.GetCookies(url)[cookie.Name]!=null)
+            if (Container.GetCookies(url)[cookie.Name] != null)
             {
-                Container.GetCookies(url).Cast<Cookie>().ToList().ForEach(c => c=cookie);
+                Container.GetCookies(url).Cast<Cookie>().ToList().ForEach(c => c = cookie);
             }
             else
             {
@@ -84,11 +86,10 @@ namespace SSL.Net.Http
         /// <param name="cookies">New CookieCollection you want to set it in CookieCore</param>
         public void Set(CookieCollection cookies)
         {
-            foreach(Cookie cookie in cookies)
+            foreach (Cookie cookie in cookies)
             {
                 Set(cookie);
             }
-            
         }
 
         /// <inheritdoc cref="Set(Cookie)"/>
@@ -161,6 +162,7 @@ namespace SSL.Net.Http
         {
             Container = new CookieContainer();
         }
+
         /// <summary>
         /// Clear Special Cookie Name from CookieCore.
         /// </summary>
@@ -174,7 +176,7 @@ namespace SSL.Net.Http
         /// <inheritdoc cref="Clear(string, string)"/>
         /// <param name="url">The url of the cookie.</param>
         /// <param name="name">The name of the cookie.</param>
-        public void Clear(Uri url,string name)
+        public void Clear(Uri url, string name)
         {
             Container.GetCookies(url).Cast<Cookie>().ToList().ForEach(c => c.Expired = true);
         }
@@ -204,10 +206,42 @@ namespace SSL.Net.Http
         /// <param name="url">The url of the cookie</param>
         /// <param name="CookieName">Name of cookie you want to find it in CookieCore</param>
         ///  <returns>True means Yes cookie name exist, No means Cookie dosn'n Exits in CookieCore</returns>
-        public bool Contains(string url,string CookieName)
+        public bool Contains(string url, string CookieName)
         {
-            if(Container.Count<=0) return false;
+            if (Container.Count <= 0) return false;
             return Container.GetCookies(new Uri(url))[CookieName] != null;
+        }
+
+        /// <summary>
+        /// Get Cookie Detail in CookieCore
+        /// </summary>
+        /// <param name="url">The url of the cookie (in Uri format)</param>
+        public CookieCollection GetCookies(Uri url)
+        {
+            return Container.GetCookies(url);
+        }
+
+        /// <inheritdoc cref="GetCookies(Uri)"/>
+        /// <param name="url">The url of the cookie</param>
+        public CookieCollection GetCookies(string url)
+        {
+            return Container.GetCookies(new Uri(url));
+        }
+
+        /// <summary>
+        /// Get Cookie Name and Value in CookieCore
+        /// </summary>
+        /// <param name="url">The url of the cookie (in Uri format)</param>
+        public string GetCookieHeader(Uri url)
+        {
+            return Container.GetCookieHeader(url);
+        }
+
+        /// <inheritdoc cref="GetCookieHeader(Uri)"/>
+        /// <param name="url">The url of the cookie</param>
+        public string GetCookieHeader(string url)
+        {
+            return Container.GetCookieHeader(new Uri(url));
         }
 
         /// <summary>
@@ -218,7 +252,7 @@ namespace SSL.Net.Http
         {
             CookieCollection cookieCollection = new CookieCollection();
 
-            Hashtable DomainTable = (Hashtable)Container.GetType().GetField("m_domainTable",BindingFlags.NonPublic |BindingFlags.GetField |BindingFlags.Instance).GetValue(Container);
+            Hashtable DomainTable = (Hashtable)Container.GetType().GetField("m_domainTable", BindingFlags.NonPublic | BindingFlags.GetField | BindingFlags.Instance).GetValue(Container);
             foreach (DictionaryEntry element in DomainTable)
             {
                 SortedList DomainList = (SortedList)element.Value.GetType().GetField("m_list", BindingFlags.Instance | BindingFlags.NonPublic).GetValue(element.Value);
@@ -227,7 +261,6 @@ namespace SSL.Net.Http
                     cookieCollection.Add((CookieCollection)((DictionaryEntry)e).Value);
                 }
             }
-            
 
             return cookieCollection;
         }
@@ -236,7 +269,7 @@ namespace SSL.Net.Http
         /// Returns a string consisting of the names and cookie values.
         /// </summary>
         /// <returns>A string consisting of the names and values ​​of the cookies.</returns>
-        override public string ToString()
+        public override string ToString()
         {
             var strBuilder = new StringBuilder();
             foreach (Cookie cookie in this.GetAllCookies())
