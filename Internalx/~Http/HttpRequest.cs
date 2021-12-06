@@ -2985,8 +2985,7 @@ namespace SSL.Net.Http
 
                 #endregion Creating a connection
 
-                tcpClient.SendTimeout = _readWriteTimeout;
-                tcpClient.ReceiveTimeout = _readWriteTimeout;
+                
             }
             else
             {
@@ -2999,6 +2998,9 @@ namespace SSL.Net.Http
                     throw NewHttpException(Resources.HttpException_FailedConnect, ex, HttpExceptionStatus.ConnectFailure);
                 }
             }
+
+            tcpClient.SendTimeout = _readWriteTimeout;
+            tcpClient.ReceiveTimeout = _readWriteTimeout;
 
             return tcpClient;
         }

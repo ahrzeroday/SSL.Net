@@ -1778,6 +1778,10 @@ namespace SSL.Net.Http
                 int.TryParse(_headers["Content-Length"], out int contentLength);
                 return contentLength;
             }
+            else if (_receiverHelper.HasData) //if Content-Length not found try to calculate ContentLength
+            {
+                ContentLength = _receiverHelper.Length - _receiverHelper.Position;
+            }
 
             return -1;
         }
